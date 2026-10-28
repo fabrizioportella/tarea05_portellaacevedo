@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Anexo fotográfico de fiscalización</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <div>
+      <h1>Anexo fotográfico</h1>
+      <p>Fiscalización digital · práctica</p>
+    </div>
+    <button id="newProjectBtn" class="secondary" type="button">+ Nuevo proyecto</button>
+  </header>
+
+  <main>
+    <section class="panel project-panel" aria-labelledby="projectTitle">
+      <div class="section-heading">
+        <h2 id="projectTitle">Datos de fiscalización</h2>
+        <span id="saveStatus" class="status">Sin cambios</span>
+      </div>
+      <form id="projectForm" class="project-grid">
+        <label>Código de práctica<input id="code" maxlength="50" required></label>
+        <label>Fecha de intervención<input id="date" type="date" required></label>
+        <label>Lugar<input id="place" maxlength="120" required></label>
+        <label>Fiscalizador<input id="inspector" maxlength="100" required></label>
+        <label class="span-2">Establecimiento o unidad (ficticio)<input id="entity" maxlength="150" required></label>
+      </form>
+      <div class="toolbar">
+        <button id="saveProjectBtn" class="primary" type="button">Guardar proyecto</button>
+        <label class="select-wrap">Abrir proyecto
+          <select id="projectSelect" aria-label="Proyectos guardados"><option value="">Seleccione…</option></select>
+        </label>
+      </div>
+    </section>
+
+    <section class="panel" aria-labelledby="photosTitle">
+      <div class="section-heading">
+        <h2 id="photosTitle">Fotografías</h2>
+        <span id="photoCount" class="status">0 fotos</span>
+      </div>
+
+      <div class="capture-actions">
+        <button id="cameraBtn" class="primary" type="button">📷 Tomar fotografía</button>
+        <button id="galleryBtn" class="secondary" type="button">▣ Seleccionar imágenes</button>
+        <input id="cameraInput" type="file" accept="image/*" capture="environment" hidden>
+        <input id="galleryInput" type="file" accept="image/*" multiple hidden>
+      </div>
+
+      <div id="emptyState" class="empty-state">
+        <strong>Aún no hay fotografías</strong>
+        <span>Capture o seleccione imágenes desde este dispositivo.</span>
+      </div>
+      <div id="photoList" class="photo-list"></div>
+      <button id="exportBtn" class="export" type="button">Descargar anexo Word (.docx)</button>
+    </section>
+  </main>
+
+  <dialog id="previewDialog">
+    <div class="dialog-head"><h2>Vista previa</h2><button id="closePreviewBtn" type="button" aria-label="Cerrar">×</button></div>
+    <div id="previewImages" class="preview-images"></div>
+    <label>Descripción general<textarea id="previewDescription" rows="3" maxlength="500" placeholder="Describa lo observado"></textarea></label>
+    <p class="hint">La foto se guarda al pulsar “Confirmar e incorporar”. Después puede editarla en la galería.</p>
+    <div class="dialog-actions"><button id="cancelPreviewBtn" class="secondary" type="button">Cancelar</button><button id="confirmPhotoBtn" class="primary" type="button">Confirmar e incorporar</button></div>
+  </dialog>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <script src="vendor/docx.iife.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
